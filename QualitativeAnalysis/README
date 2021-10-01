@@ -1,0 +1,11 @@
+This folder contains notebooks that were used to generate the qualitative plots. Tested in Google Colab.
+
+After training the models using the Train_and_test.ipynb, change the location of the models appropriately in the following notebooks.
+
+QualitativeAnalysis.ipynb:
+Contains the code to generate attributions for sequences and save as a pickle file.
+Utilize the saved attributions to make the importance vs length and the correlation with SWI plots.
+
+ConservationVsImportance.ipynb:
+Generate the attributions for sequences using the previous script and make the conservation vs importance plot.
+Attributions for the three families from the training set used to make the plot in the paper are included in the folder Data.

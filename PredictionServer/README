@@ -1,0 +1,15 @@
+Solubility / Usability prediction server
+
+For installing required packages use:
+pip install -r requirements.txt
+
+All models go into models/
+Model name format: {PREDICTION_TYPE}_{MODEL_TYPE}_{Fold number 0-4}_quantized.onnx
+
+Example Usage: 
+python predict.py --FASTA_PATH ./test_fasta.fasta --OUTPUT_PATH ./test_preds.csv --MODEL_TYPE ESM12 --PREDICTION_TYPE S
+
+For solubility PREDICTION_TYPE is S, for usability PREDICTION_TYPE is U and to output both together in the same file it is SU
+MODEL_TYPE is Distilled or ESM12 or ESM1b or Both (ensemble prediction)
+
+Recommended model is Distilled (NetSolP-D from the paper) since it has the best trade-off between speed and performance.

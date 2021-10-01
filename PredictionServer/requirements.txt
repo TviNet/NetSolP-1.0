@@ -1,0 +1,5 @@
+torch>=1.6
+onnxruntime>=1.7.0
+numpy
+pandas
+fair-esm
