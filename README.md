@@ -20,6 +20,10 @@ python train.py
 ```
 more details and requirements in the README of folder TrainAndTest.
 
+## License
+
+The code is licensed under the [BSD 3-Clause license](https://github.com/TviNet/NetSolP-1.0/blob/main/LICENSE).
+
 ## Citation
 
 ```
