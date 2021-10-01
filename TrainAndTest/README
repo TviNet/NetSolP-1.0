@@ -1,0 +1,3 @@
+This folder contains notebooks that were used to train and test the ESM ensemble models. 
+ESM12 was trained and tested in Google Colab, the notebook is provided. 
+ESM1b requires significantly larger compute and was trained on the DTU HPC. The python scripts correspond to this.
