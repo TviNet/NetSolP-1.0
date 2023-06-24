@@ -6,19 +6,19 @@ It contains the code for the webserver. Additionally, it also has the datasets, 
 
 ## Usage
 
-For prediction:
-```
-cd PredictionServer/ 
-python predict.py --FASTA_PATH ./test_fasta.fasta --OUTPUT_PATH ./test_preds.csv --MODEL_TYPE ESM12 --PREDICTION_TYPE S
-```
-more details and requirements in the README of folder PredictionServer.
-
 For training:
 ```
 cd TrainAndTest/
 python train.py
 ```
 more details and requirements in the README of folder TrainAndTest.
+
+For prediction: (First train and convert the models to ONNX OR download the pre-trained models from the webserver Downloads tab)
+```
+cd PredictionServer/ 
+python predict.py --FASTA_PATH ./test_fasta.fasta --OUTPUT_PATH ./test_preds.csv --MODEL_TYPE ESM12 --PREDICTION_TYPE S
+```
+more details and requirements in the README of folder PredictionServer.
 
 ## License
 
