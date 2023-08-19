@@ -27,16 +27,19 @@ The code is licensed under the [BSD 3-Clause license](https://github.com/TviNet/
 ## Citation
 
 ```
-@article {Thumuluri2021,
-	author = {Thumuluri, Vineet and Martiny, Hannah-Marie and Armenteros, Jose J. Almagro and Salomon, Jesper and Nielsen, Henrik and Johansen, Alexander R.},
-	title = {NetSolP: predicting protein solubility in E. coli using language models},
-	elocation-id = {2021.07.21.453084},
-	year = {2021},
-	doi = {10.1101/2021.07.21.453084},
-	publisher = {Cold Spring Harbor Laboratory},
-	URL = {https://www.biorxiv.org/content/early/2021/07/22/2021.07.21.453084},
-	eprint = {https://www.biorxiv.org/content/early/2021/07/22/2021.07.21.453084.full.pdf},
-	journal = {bioRxiv}
+@article{10.1093/bioinformatics/btab801,
+    author = {Thumuluri, Vineet and Martiny, Hannah-Marie and Almagro Armenteros, Jose J and Salomon, Jesper and Nielsen, Henrik and Johansen, Alexander Rosenberg},
+    title = "{NetSolP: predicting protein solubility in Escherichia coli using language models}",
+    journal = {Bioinformatics},
+    volume = {38},
+    number = {4},
+    pages = {941-946},
+    year = {2021},
+    month = {11},
+    issn = {1367-4803},
+    doi = {10.1093/bioinformatics/btab801},
+    url = {https://doi.org/10.1093/bioinformatics/btab801},
+    eprint = {https://academic.oup.com/bioinformatics/article-pdf/38/4/941/49008876/btab801.pdf},
 }
 
 ```
