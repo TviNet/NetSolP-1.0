@@ -1,3 +1,8 @@
+# Copyright (c) 2021, Technical University of Denmark
+# All rights reserved.
+
+# This source code is licensed under the BSD-style license found in the
+# LICENSE file in the root directory of this source tree. 
 import onnxruntime
 from data import *
 import os
@@ -15,14 +20,14 @@ def get_preds_split(split_i, embed_dataloader, args, prediction_type, test_df):
     opts.inter_op_num_threads = args.NUM_THREADS
     opts.execution_mode = onnxruntime.ExecutionMode.ORT_SEQUENTIAL
     providers = ["CUDAExecutionProvider", "CPUExecutionProvider"] if torch.cuda.is_available() else ["CPUExecutionProvider"]
-
+    
     # Adjust session options
     if args.MODEL_TYPE == "Both":
         model_types = ["ESM12", "ESM1b"]
     else:
         model_types = [args.MODEL_TYPE]
-    model_paths = [os.path.join(args.MODELS_PATH, f"{prediction_type}_{mt}_{split_i}_quantized.onnx") for mt in model_types]
 
+    model_paths = [os.path.join(args.MODELS_PATH, f"{prediction_type}_{mt}_{split_i}_quantized.onnx") for mt in model_types]
     ort_sessions = [onnxruntime.InferenceSession(mp, sess_options=opts, providers=providers) for mp in model_paths]
 
     embed_dict = {}
@@ -46,7 +51,8 @@ def run_model_distilled(embed_dataloader, args, prediction_type, test_df):
     opts.execution_mode = onnxruntime.ExecutionMode.ORT_SEQUENTIAL
     
     # Adjust session options
-    model_paths = [os.path.join(args.MODELS_PATH, f"{prediction_type}_ESM1b_distilled_quantized.onnx")]
+    model_paths = [os.path.join(args.MODELS_PATH,
+      f"{prediction_type}_ESM1b_distilled_quantized.onnx")]
     ort_sessions = [onnxruntime.InferenceSession(mp, sess_options=opts) for mp in model_paths]
 
     embed_dict = {}
@@ -172,6 +178,3 @@ if __name__ == "__main__":
     else:
         get_preds(args)
     print(f"Finished prediction in {time.time()-t1}s")
-    
-
-    
