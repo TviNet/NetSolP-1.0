@@ -1,8 +1,3 @@
-# Copyright (c) 2021, Technical University of Denmark
-# All rights reserved.
-
-# This source code is licensed under the BSD-style license found in the
-# LICENSE file in the root directory of this source tree. 
 import onnxruntime
 from data import *
 import os
@@ -19,15 +14,16 @@ def get_preds_split(split_i, embed_dataloader, args, prediction_type, test_df):
     opts.intra_op_num_threads = args.NUM_THREADS
     opts.inter_op_num_threads = args.NUM_THREADS
     opts.execution_mode = onnxruntime.ExecutionMode.ORT_SEQUENTIAL
-    
+    providers = ["CUDAExecutionProvider", "CPUExecutionProvider"] if torch.cuda.is_available() else ["CPUExecutionProvider"]
+
     # Adjust session options
     if args.MODEL_TYPE == "Both":
         model_types = ["ESM12", "ESM1b"]
     else:
         model_types = [args.MODEL_TYPE]
-    model_paths = [os.path.join(args.MODELS_PATH,
-      f"{prediction_type}_{mt}_{split_i}_quantized.onnx") for mt in model_types]
-    ort_sessions = [onnxruntime.InferenceSession(mp, sess_options=opts) for mp in model_paths]
+    model_paths = [os.path.join(args.MODELS_PATH, f"{prediction_type}_{mt}_{split_i}_quantized.onnx") for mt in model_types]
+
+    ort_sessions = [onnxruntime.InferenceSession(mp, sess_options=opts, providers=providers) for mp in model_paths]
 
     embed_dict = {}
     inputs_names = ort_sessions[0].get_inputs()
@@ -38,7 +34,7 @@ def get_preds_split(split_i, embed_dataloader, args, prediction_type, test_df):
           ort_outs = [ort_session.run(None, ort_inputs)[0] for ort_session in ort_sessions]
           embed_dict[labels[0]] = sum(ort_outs) / len(ort_outs)
 
-    pred_df = pd.DataFrame(embed_dict.items(), columns=['sid', 'preds'])
+    pred_df = pd.DataFrame(embed_dict.items(), columns=["sid", "preds"])
     pred_df = test_df.merge(pred_df)
     #print(pred_df)
     return pred_df
@@ -50,8 +46,7 @@ def run_model_distilled(embed_dataloader, args, prediction_type, test_df):
     opts.execution_mode = onnxruntime.ExecutionMode.ORT_SEQUENTIAL
     
     # Adjust session options
-    model_paths = [os.path.join(args.MODELS_PATH,
-      f"{prediction_type}_ESM1b_distilled_quantized.onnx")]
+    model_paths = [os.path.join(args.MODELS_PATH, f"{prediction_type}_ESM1b_distilled_quantized.onnx")]
     ort_sessions = [onnxruntime.InferenceSession(mp, sess_options=opts) for mp in model_paths]
 
     embed_dict = {}
